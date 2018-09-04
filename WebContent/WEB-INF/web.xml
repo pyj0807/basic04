@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>basic04</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<listener>
+		<listener-class>handler.ApplicationHandler</listener-class>
+	</listener>
+	<listener>
+		<listener-class>handler.ApplicationSupport</listener-class>
+	</listener>
+	<listener>
+		<listener-class>handler.SessionHandler</listener-class>
+	</listener>
+	<listener>
+		<listener-class>handler.RequestHandler</listener-class>
+	</listener>
+
+	<!-- add filters -->
+	<filter>
+		<filter-name>t</filter-name>
+		<filter-class>filters.TestFilter</filter-class>
+		<init-param>
+			<param-name>exclude</param-name>
+			<param-value>-</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>s</filter-name>
+		<filter-class>filters.SecondFilter</filter-class>
+	</filter>
+	
+	<!-- mappig은 순서대로 필터작용
+	     지금은 s은 처음에 있으니 s가 먼저 작용이 됨  -->
+	<filter-mapping>
+		<filter-name>s</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>t</filter-name>
+		<url-pattern>/close.jsp</url-pattern>
+		<url-pattern>/listener/*</url-pattern>
+	</filter-mapping>
+	
+
+
+
+
+
+	<session-config>
+		<session-timeout>1</session-timeout>
+	</session-config>
+</web-app>
