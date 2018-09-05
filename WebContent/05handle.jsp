@@ -27,9 +27,16 @@
 				// 업로드를 진행해야된다면..
 				// 직접 IO 작업을 하거나 writeTo,
 				// fp.getInputStream();
-				File dest = new File("c:\\storage");
-				fp.writeTo(dest);
-				
+				String sav = application.getRealPath("/storage");	//getRealPath는 업로드 할때만 사용
+				File saveDir = new File(sav);
+				fp.writeTo(saveDir);
+				%>
+				실제 업로드한 경로 : <%=sav%><br/>
+				당신이 접근할수 있게 설정된 uri : <%=application.getContextPath() %>/storage/<%=fn%><br/>
+
+				<a download href="<%=application.getContextPath() %>/storage/<%=fn %>">다운</a>
+								
+				<%
 			}else if(part.isParam()) {
 				ParamPart pp = (ParamPart)part;
 				String na = pp.getName();
@@ -41,3 +48,15 @@
 		}
 	}
 %>
+
+
+
+
+
+
+
+
+
+
+
+

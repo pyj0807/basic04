@@ -15,11 +15,10 @@ public class SecondFilter extends HttpFilter{
 		Locale loc = request.getLocale();
 		String lang = loc.getLanguage();
 		System.out.println("[SecondFilter] : "+lang);
-		chain.doFilter(request, response);
 		if(lang.equalsIgnoreCase("ko")) {
 			chain.doFilter(request, response);
 		}else {
-			
+				
 		}
 	}
 }
